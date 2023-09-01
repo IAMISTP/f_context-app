@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Products from "./Products";
 import Options from "./Options";
 import ErrorBanner from "./ErrorBanner";
+import {OrderContext} from "../context/OrderContext";
 const Type = ({ orderType }) => {
   const [items, setItems] = useState([]);
   const [error, setError] = useState(false);
+  const [orderData, updateItemCount] = useContext(OrderContext)
+
+console.log('orderData, updateItemCount',orderData, updateItemCount);
+
   useEffect(() => {
     loadItem(orderType);
   }, [orderType]);
@@ -13,7 +18,6 @@ const Type = ({ orderType }) => {
   const loadItem = async (orderType) => {
     try {
       const response = await axios.get(`http://localhost:4000/${orderType}`);
-      console.log(response);
       setItems(response.data);
     } catch (error) {
       setError(true);
