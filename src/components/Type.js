@@ -31,6 +31,7 @@ console.log('orderData, updateItemCount',orderData, updateItemCount);
       key={item.name}
       name={item.name}
       imagePath={item.imagePath}
+      updateItemCount={(itemName, newItemCount)=> updateItemCount(itemName, newItemCount, orderType)}
     />
   ));
   if (error) {
@@ -40,7 +41,7 @@ console.log('orderData, updateItemCount',orderData, updateItemCount);
     <div>
       <h2>주문 종류</h2>
       <p>하나의 가격</p>
-      <p>총 가격:</p>
+      <p>총 가격:{orderData.totals[orderType]}</p>
       <div
         style={{
           display: "flex",
